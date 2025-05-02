@@ -25,6 +25,8 @@ app.use("/order", orderRoutes)
 app.get("/test-protected", authentificateToken, (req, res) => {
     res.status(200).json({message: "Accessed"})
 })
+const itemRoutes = require('./routes/items')
+app.use("/items", itemRoutes)
 
 app.listen(process.env.PORT, process.env.HOSTNAME,  ()=> {
     console.info(`server started at ${process.env.HOSTNAME}:${process.env.PORT}`)
