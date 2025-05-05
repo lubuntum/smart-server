@@ -25,13 +25,13 @@ const registerAccount = async (acc) => {
     }
 }
 
-const loginAccount = async (email, pass) => {
+const loginAccount = async (email, password) => {
     return new Promise((resolve, reject) => {
         db.get("SELECT * FROM account where email = ?", [email], async (err, account) => {
             if (err) return reject({status: 500, message: `error occurred: ${err.message && err.message}`})
             if (!account) return reject({status: 400, message: 'Invalid credentials'})
-
-            const isMatch = await comparePasswords(pass, account.password)
+            console.log(await comparePasswords(password, account.password))
+            const isMatch = await comparePasswords(password, account.password)
             if (!isMatch)
                 return reject({status: 400, message: 'Invalid credentials'})
             const token = "Bearer " + jwt.sign({id: account.id}, process.env.SECRET_KEY, {expiresIn: '1h'})

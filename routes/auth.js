@@ -3,8 +3,8 @@ const router = express.Router()
 const {loginAccount, registerAccount} = require("../services/database_services/accountService")
 
 router.post('/login', (req, res) => {
-    const {email, pass} = req.body
-    loginAccount(email, pass).then(result => {
+    const {email, password} = req.body
+    loginAccount(email, password).then(result => {
         res.status(result.status).json(result)
     }).catch(err=> {
         res.status(err.status || 500).json(err)

@@ -21,7 +21,7 @@ app.use("/barrel", barrelComponentsRoutes)
 const accountRoutes = require('./routes/account')
 app.use("/account", accountRoutes)
 const orderRoutes = require('./routes/order')
-app.use("/order", orderRoutes)
+app.use("/orders", orderRoutes)
 app.get("/test-protected", authentificateToken, (req, res) => {
     res.status(200).json({message: "Accessed"})
 })
