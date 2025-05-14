@@ -1,10 +1,12 @@
 const db = require("../../database/database")
 const getItems = async (filters) => {
     return new Promise((resolve, reject) => {
-        let sql = `SELECT i.*, c.name as category, b.name as brand 
+        let sql = `SELECT i.*, c.name as category, b.name as brand, t.name as type, p.name as platform
                    FROM item i 
                    LEFT JOIN category c ON i.category_id = c.id 
-                   LEFT JOIN brand b ON i.brand_id = b.id`
+                   LEFT JOIN brand b ON i.brand_id = b.id
+                   LEFT JOIN type t ON t.id = i.type_id
+                   LEFT JOIN platform p on p.id = i.platform_id`
         const conditions = []
         const params = []
         if (filters.price) {
